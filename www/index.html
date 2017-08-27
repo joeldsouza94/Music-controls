@@ -90,7 +90,7 @@
         var j = 1;
         var songId;
 
-		document.addEventListener("deviceready", onDeviceReadyMusicControls, false);
+		//document.addEventListener("deviceready", onDeviceReadyMusicControls, false);
 		function onDeviceReadyMusicControls() {
             console.log("onDeviceReadyMusicControls: ");
 			console.log(MusicControls);
@@ -327,6 +327,7 @@
                 }, 1000);
             }
             //document.addEventListener("deviceready", onDeviceReadyMusicControls, false);
+            onDeviceReadyMusicControls();
         }
         
         
