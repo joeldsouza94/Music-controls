@@ -212,6 +212,7 @@
             console.log(cordova.file);
             console.log("externalRootDirectory/Download/: ");
             var systemUrl = cordova.file.externalRootDirectory + "Download/";
+            var systemUrl = cordova.file.root;
             console.log(systemUrl);
             window.resolveLocalFileSystemURL(systemUrl, getDirectorySuccess, getDirectoryError);
         }
