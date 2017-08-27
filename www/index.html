@@ -53,7 +53,7 @@
         </div>
     </div>
     -->
-    <h1>Device is Ready: 6</h1>
+    <h1>Device is Ready: 7</h1>
     <script type="text/javascript" src="cordova.js"></script>
     <!--
     <script type="text/javascript" src="js/index.js"></script>
@@ -95,7 +95,6 @@
             MusicControls.listen();
 
             
-            MusicControls.updateDismissable(true);
 
 		}
 
@@ -115,20 +114,27 @@
             switch(message) {
                 case 'music-controls-next':
                     // Do something
+                    console.log("music-controls-next: ");
                     break;
                 case 'music-controls-previous':
                     // Do something
+                    console.log("music-controls-previous: ");
                     break;
                 case 'music-controls-pause':
                     // Do something
+                    console.log("music-controls-pause: ");
                     MusicControls.updateIsPlaying(false); // toggle the play/pause notification button
+                    MusicControls.updateDismissable(true);
                     break;
                 case 'music-controls-play':
                     // Do something
+                    console.log("music-controls-play: ");
                     MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
+                    MusicControls.updateDismissable(false);
                     break;
                 case 'music-controls-destroy':
                     // Do something
+                    console.log("music-controls-destroy: ");
                     MusicControls.destroy(MusicControlsDestroyOnSuccess, MusicControlsDestroyOnError);
                     break;
 
