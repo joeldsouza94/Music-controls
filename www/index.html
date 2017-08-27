@@ -91,11 +91,11 @@
         var songId;
 
 		//document.addEventListener("deviceready", onDeviceReadyMusicControls, false);
-		function onDeviceReadyMusicControls() {
+		function onDeviceReadyMusicControls(title) {
             console.log("onDeviceReadyMusicControls: ");
 			console.log(MusicControls);
             MusicControls.create({
-                track       : 'Time is Running Out',        // optional, default : ''
+                track       : title,        // optional, default : ''
                 artist      : 'Muse',                       // optional, default : ''
                 cover       : 'https://pbs.twimg.com/profile_images/596777148435705856/tsE4inUQ.jpg',      // optional, default : nothing
                 // cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
@@ -277,6 +277,7 @@ function fail(error) {
             button.setAttribute("onclick", "playAudio('" + songId + "')");
             console.log("button onclick Id: " + button.getAttribute('onclick'));
             button.setAttribute("data-src", songEntry.toURL());
+            button.setAttribute("data-track", songEntry.name);
             var hr = document.createElement("hr");
             li.appendChild(button);
             li.appendChild(hr);
@@ -294,6 +295,8 @@ function fail(error) {
             console.log("Audio class: " +audioClass);
             var url = audioElement.getAttribute('data-src');
             console.log("Audio URL: " +url);
+            var track = audioElement.getAttribute('data-track');
+            console.log("Audio track: " +track);
  
             // Play the audio file at url
             if (my_media == null) {
@@ -336,7 +339,7 @@ function fail(error) {
                 }, 1000);
             }
             //document.addEventListener("deviceready", onDeviceReadyMusicControls, false);
-            onDeviceReadyMusicControls();
+            onDeviceReadyMusicControls(track);
         }
         
         
