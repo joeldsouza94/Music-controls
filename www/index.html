@@ -53,7 +53,7 @@
         </div>
     </div>
     -->
-    <h1>Device is Ready: 5</h1>
+    <h1>Device is Ready: 6</h1>
     <script type="text/javascript" src="cordova.js"></script>
     <!--
     <script type="text/javascript" src="js/index.js"></script>
@@ -70,7 +70,7 @@
                 // cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
                 //           or a remote url ('http://...', 'https://...', 'ftp://...')
                 isPlaying   : true,                         // optional, default : true
-                dismissable : true,                         // optional, default : false
+                dismissable : false,                         // optional, default : false
 
                 // hide previous/next/close buttons:
                 hasPrev   : true,      // show previous button, optional, default: true
@@ -94,13 +94,8 @@
             // The plugin will run the events function each time an event is fired
             MusicControls.listen();
 
-            MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
+            
             MusicControls.updateDismissable(true);
-
-            MusicControls.updateElapsed({
-                elapsed: 208, // seconds
-                isPlaying: true
-            });
 
 		}
 
@@ -126,9 +121,11 @@
                     break;
                 case 'music-controls-pause':
                     // Do something
+                    MusicControls.updateIsPlaying(false); // toggle the play/pause notification button
                     break;
                 case 'music-controls-play':
                     // Do something
+                    MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
                     break;
                 case 'music-controls-destroy':
                     // Do something
