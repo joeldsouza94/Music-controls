@@ -37,9 +37,7 @@
     * Create your own at http://cspisawesome.com
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-    <!--
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    -->
+
     <!-- Include jQuery Mobile stylesheets -->
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">  <!-- Include the jQuery library -->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -56,15 +54,7 @@
 </head>
 
 <body>
-    <!--
-    <div class="app">
-        <h1>PhoneGap</h1>
-        <div id="deviceready" class="blink">
-            <p class="event listening">Connecting to Device</p>
-            <p class="event received">Device is Ready: 1</p>
-        </div>
-    </div>
-    -->
+
     <div data-role="page" id="pageone">
 
         <div data-role="header">
@@ -72,18 +62,29 @@
         </div>
 
         <div data-role="main" class="ui-content">
+            <h3 id="audio_position" style="text-align: center;">0 sec</h3>
+            <button class="ui-btn" onclick="pauseAudio();">Pause</button>
+            <button class="ui-btn" onclick="stopAudio();">Stop</button><br />
+            <h1>Online song list: </h1>
+            <button class="ui-btn" id="onlineSound1" data-src="http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3" onclick="playAudio('onlineSound1');">Rock guitar</button>
+            <br />
+            <h1>Phone song list: </h1>
+            <form class="ui-filterable">
+                <input id="myFilter" data-type="search" placeholder="Search..">
+            </form>
+            <ul id="songList" data-role="listview" data-filter="true" data-input="#myFilter" data-inset="true">
+            </ul>
+            <br /><br /><br /><br /><br />
         </div>
 
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>
-    <!--
-    <script type="text/javascript" src="js/index.js"></script>
-    -->
+
     <script type="text/javascript">
-        //app.initialize();
 		document.addEventListener("deviceready", onDeviceReadyMusicControls, false);
 		function onDeviceReadyMusicControls() {
+            console.log("MusicControls: ");
 			console.log(MusicControls);
             MusicControls.create({
                 track       : 'Time is Running Out',        // optional, default : ''
@@ -115,8 +116,6 @@
             // Start listening for events
             // The plugin will run the events function each time an event is fired
             MusicControls.listen();
-
-            
 
 		}
 
