@@ -212,7 +212,6 @@
             console.log(cordova.file);
             console.log("externalRootDirectory/Download/: ");
             var systemUrl = cordova.file.externalRootDirectory + "Download/";
-            var systemUrl = cordova.file.root;
             console.log(systemUrl);
             window.resolveLocalFileSystemURL(systemUrl, getDirectorySuccess, getDirectoryError);
         }
@@ -238,7 +237,11 @@
                 if(entries[i].name.indexOf(".mp3") != -1){
                     songList[i] = entries[i].toURL();
                     console.log("song toURL: ");
-                    console.log(songList[i]);                      
+                    console.log(songList[i]);  
+                    entries[i].getMetadata(function(meta) {
+                            console.log("meta: ");
+                            console.log(meta);   
+                    }, false);                  
                     createSongList(entries[i]);
                 }
             }
