@@ -84,7 +84,8 @@
     <script type="text/javascript">
         var my_media = null;
         var mediaTimer = null;
-        var prevId = null;
+        var prevSongId = null;
+        var currSongId;
 
         var songList = new Array();
         var j = 1;
@@ -159,7 +160,7 @@
                 case 'music-controls-play':
                     // Do something
                     console.log("music-controls-play: ");
-                    playAudio(id);
+                    playAudio(currSongId);
                     MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
                     MusicControls.updateDismissable(false);
                     break;
@@ -287,12 +288,13 @@ function fail(error) {
         }
 
         function playAudio(id) {
-            if (id != prevId) {
+            currSongId = id;
+            if (currSongId != prevSongId) {
                 stopAudio();
             }
-            prevId = id;
+            prevSongId = currSongId;
             var running;
-            var audioElement = document.getElementById(id);
+            var audioElement = document.getElementById(currSongId);
             var audioClass = audioElement.className;
             console.log("Audio class: " +audioClass);
             var url = audioElement.getAttribute('data-src');
