@@ -60,8 +60,8 @@
     -->
     <script type="text/javascript">
         //app.initialize();
-		document.addEventListener("deviceready", onDeviceReady, false);
-		function onDeviceReady() {
+		document.addEventListener("deviceready", onDeviceReadyMusicControls, false);
+		function onDeviceReadyMusicControls() {
 			console.log(MusicControls);
             MusicControls.create({
                 track       : 'Time is Running Out',        // optional, default : ''
@@ -85,16 +85,83 @@
                 // Android only, optional
                 // text displayed in the status bar when the notification (and the ticker) are updated
                 ticker    : 'Now playing "Time is Running Out"'
-            }, onSuccess, onError);
+            }, MusicControlsCreateOnSuccess, MusicControlsCreateOnError);
+
+            // Register callback
+            MusicControls.subscribe(events);
+
+            // Start listening for events
+            // The plugin will run the events function each time an event is fired
+            MusicControls.listen();
 		}
 
-        function onSuccess(successCode) {
-            console.log("MusicControls onSuccess: ");
+        function MusicControlsCreateOnSuccess(successCode) {
+            console.log("MusicControlsCreateOnSuccess: ");
             console.log(successCode);
         }
 
-        function onError(errorCode) {
-            console.log("MusicControls onError: ");
+        function MusicControlsCreateOnError(errorCode) {
+            console.log("MusicControlsCreateOnError: ");
+            console.log(errorCode);
+        }
+
+        function events(action) {
+
+          const message = JSON.parse(action).message;
+            switch(message) {
+                case 'music-controls-next':
+                    // Do something
+                    break;
+                case 'music-controls-previous':
+                    // Do something
+                    break;
+                case 'music-controls-pause':
+                    // Do something
+                    break;
+                case 'music-controls-play':
+                    // Do something
+                    break;
+                case 'music-controls-destroy':
+                    // Do something
+                    MusicControls.destroy(MusicControlsDestroyOnSuccess, MusicControlsDestroyOnError);
+                    break;
+
+                // External controls (iOS only)
+                case 'music-controls-toggle-play-pause' :
+                    // Do something
+                    break;
+                case 'music-controls-seek-to':
+                    const seekToInSeconds = JSON.parse(action).position;
+                    MusicControls.updateElapsed({
+                        elapsed: seekToInSeconds,
+                        isPlaying: true 
+                    });
+                    // Do something
+                    break;
+
+                // Headset events (Android only)
+                // All media button events are listed below
+                case 'music-controls-media-button' :
+                    // Do something
+                    break;
+                case 'music-controls-headset-unplugged':
+                    // Do something
+                    break;
+                case 'music-controls-headset-plugged':
+                    // Do something
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function MusicControlsDestroyOnSuccess(successCode) {
+            console.log("MusicControlsDestroyOnSuccess: ");
+            console.log(successCode);
+        }
+
+        function MusicControlsDestroyOnError(errorCode) {
+            console.log("MusicControlsDestroyOnError: ");
             console.log(errorCode);
         }
 
