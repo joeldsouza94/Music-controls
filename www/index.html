@@ -205,21 +205,68 @@
             console.log("externalRootDirectory/Download/: ");
             var systemUrl = cordova.file.externalRootDirectory + "Download/";
             console.log(systemUrl);
-            window.resolveLocalFileSystemURL(systemUrl, getDirSuccess, getDirError);
+            window.resolveLocalFileSystemURL(systemUrl, getDirectorySuccess, getDirectoryError);
         }
 
-        function getDirSuccess(dirEntry) {
-            console.log("getDirSuccess: ");
+        function getDirectorySuccess(dirEntry) {
+            console.log("getDirectorySuccess: ");
             console.log(dirEntry);
             var directoryReader = dirEntry.createReader();
             console.log("directoryReader: ");
             console.log(directoryReader);
-            //directoryReader.readEntries(readerSuccess,fail);
+            directoryReader.readEntries(readDirectoryEntriesSuccess, readDirectoryEntriesFail);
         }
 
-        function getDirError(error) {
-            console.log("getDirError: ");
+        function getDirectoryError(error) {
+            console.log("getDirectoryError: ");
             console.log(error);
+        }
+
+        function readDirectoryEntriesSuccess(entries) {
+            console.log("readDirectoryEntriesSuccess: ");
+            var i;
+            for (i=0; i<entries.length; i++) {
+                if(entries[i].name.indexOf(".mp3") != -1){                    
+                    songList[i] = entries[i].fullPath;
+                    console.log("song fullPath: ");
+                    console.log(songList[i]);
+                    songList[i] = entries[i].toURL();
+                    console.log("song toURL: ");
+                    console.log(songList[i]);                      
+                    createSongList(entries[i]);
+                }
+            }
+            var mylist = $('#songList');
+            var listitems = mylist.children('li').get();
+            listitems.sort(function(a, b) {
+               return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+            })
+            $.each(listitems, function(idx, itm) { mylist.append(itm); });
+        }
+
+        function readDirectoryEntriesFail(error) {
+            console.log("readDirectoryEntriesFail: ");
+            console.log(error);
+        }
+
+        function createSongList(songEntry) {
+            console.log("createSongList: ");
+            var li = document.createElement("li");
+            var button = document.createElement("button");
+            button.innerHTML = songEntry.name;
+            songId = "song" + j;
+            console.log("songId: " + songId);
+            button.setAttribute("id", songId);
+            console.log("button Id: " + button.getAttribute('id'));
+            button.setAttribute("class", "ui-btn");
+            j++;
+            //button.setAttribute("onclick", "playAudio('" + songId + "')");
+            //console.log("button onclick Id: " + button.getAttribute('onclick'));
+            button.setAttribute("data-src", songEntry.toURL());
+            var hr = document.createElement("hr");
+            li.appendChild(button);
+            li.appendChild(hr);
+            document.getElementById("songList").appendChild(li);
         }
 
     </script>
