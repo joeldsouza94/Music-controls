@@ -47,7 +47,7 @@
         <h1>PhoneGap</h1>
         <div id="deviceready" class="blink">
             <p class="event listening">Connecting to Device</p>
-            <p class="event received">Device is Ready</p>
+            <p class="event received">Device is Ready: 1</p>
         </div>
     </div>
     <script type="text/javascript" src="cordova.js"></script>
@@ -57,7 +57,41 @@
 		document.addEventListener("deviceready", onDeviceReady, false);
 		function onDeviceReady() {
 			console.log(MusicControls);
+            MusicControls.create({
+                track       : 'Time is Running Out',        // optional, default : ''
+                artist      : 'Muse',                       // optional, default : ''
+                cover       : 'albums/absolution.jpg',      // optional, default : nothing
+                // cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
+                //           or a remote url ('http://...', 'https://...', 'ftp://...')
+                isPlaying   : true,                         // optional, default : true
+                dismissable : true,                         // optional, default : false
+
+                // hide previous/next/close buttons:
+                hasPrev   : false,      // show previous button, optional, default: true
+                hasNext   : false,      // show next button, optional, default: true
+                hasClose  : true,       // show close button, optional, default: false
+
+                // iOS only, optional
+                album       : 'Absolution',     // optional, default: ''
+                duration : 60, // optional, default: 0
+                elapsed : 10, // optional, default: 0
+
+                // Android only, optional
+                // text displayed in the status bar when the notification (and the ticker) are updated
+                ticker    : 'Now playing "Time is Running Out"'
+            }, onSuccess, onError);
 		}
+
+        function onSuccess(successCode) {
+            console.log("MusicControls onSuccess: ");
+            console.log(successCode);
+        }
+
+        function onError(errorCode) {
+            console.log("MusicControls onError: ");
+            console.log(errorCode);
+        }
+
     </script>
 </body>
 
