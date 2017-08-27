@@ -152,12 +152,14 @@
                 case 'music-controls-pause':
                     // Do something
                     console.log("music-controls-pause: ");
+                    pauseAudio();
                     MusicControls.updateIsPlaying(false); // toggle the play/pause notification button
                     MusicControls.updateDismissable(true);
                     break;
                 case 'music-controls-play':
                     // Do something
                     console.log("music-controls-play: ");
+                    playAudio(id);
                     MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
                     MusicControls.updateDismissable(false);
                     break;
