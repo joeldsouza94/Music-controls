@@ -84,7 +84,7 @@
     <script type="text/javascript">
 		document.addEventListener("deviceready", onDeviceReadyMusicControls, false);
 		function onDeviceReadyMusicControls() {
-            console.log("MusicControls: ");
+            console.log("onDeviceReadyMusicControls: ");
 			console.log(MusicControls);
             MusicControls.create({
                 track       : 'Time is Running Out',        // optional, default : ''
@@ -196,6 +196,30 @@
         function MusicControlsDestroyOnError(errorCode) {
             console.log("MusicControlsDestroyOnError: ");
             console.log(errorCode);
+        }
+
+        document.addEventListener("deviceready", onDeviceReadyFile, false);
+        function onDeviceReadyFile() {
+            console.log("onDeviceReadyFile: ");
+            console.log(cordova.file);
+            console.log("externalRootDirectory/Download/: ");
+            var systemUrl = cordova.file.externalRootDirectory + "Download/";
+            console.log(systemUrl);
+            window.resolveLocalFileSystemURL(systemUrl, getDirSuccess, getDirError);
+        }
+
+        function getDirSuccess(dirEntry) {
+            console.log("getDirSuccess: ");
+            console.log(dirEntry);
+            var directoryReader = dirEntry.createReader();
+            console.log("directoryReader: ");
+            console.log(directoryReader);
+            //directoryReader.readEntries(readerSuccess,fail);
+        }
+
+        function getDirError(error) {
+            console.log("getDirError: ");
+            console.log(error);
         }
 
     </script>
