@@ -61,8 +61,10 @@
             <h1>Device is Ready: 9</h1>
         </div>
 
-        <div data-role="main" class="ui-content">
-            <h3 id="audio_position" style="text-align: center;">0 sec</h3>
+        <div data-role="main" class="ui-content">            
+	    <h3 id="audio_track" style="text-align: center;">Joel - Sound Of Silence</h3>
+            <h3 id="audio_position" style="text-align: center;">0 sec</h3>            
+	    <button class="ui-btn" onclick="playAudio();">Play</button>	
             <button class="ui-btn" onclick="pauseAudio();">Pause</button>
             <button class="ui-btn" onclick="stopAudio();">Stop</button><br />
             <h1>Online song list: </h1>
@@ -85,7 +87,7 @@
         var my_media = null;
         var mediaTimer = null;
         var prevSongId = null;
-        var currSongId;
+        var currSongId = "song1";
 
         var songList = new Array();
         var j = 1;
@@ -284,11 +286,13 @@ function fail(error) {
             var hr = document.createElement("hr");
             li.appendChild(button);
             li.appendChild(hr);
-            document.getElementById("songList").appendChild(li);
+            document.getElementById('songList').appendChild(li);
         }
 
-        function playAudio(id) {
-            currSongId = id;
+        function playAudio(id) { 
+	    if (id != NULL) {
+            	currSongId = id;
+	    } 
             if (currSongId != prevSongId) {
                 stopAudio();
             }
@@ -300,7 +304,9 @@ function fail(error) {
             var url = audioElement.getAttribute('data-src');
             console.log("Audio URL: " +url);
             var track = audioElement.getAttribute('data-track');
-            console.log("Audio track: " +track);
+            console.log("Audio track: " +track); 
+	    document.getElementById('audio_track').innerHTML = track; 	
+				
  
             // Play the audio file at url
             if (my_media == null) {
