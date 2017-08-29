@@ -272,8 +272,8 @@ function fail(error) {
             console.log("createSongList: ");
             var li = document.createElement("li");
             var button = document.createElement("button");
-            button.innerHTML = songEntry.name;
-            songId = "song" + j;
+            songId = "song" + j;            
+	    button.innerHTML = songId + " " + songEntry.name;
             console.log("songId: " + songId);
             button.setAttribute("id", songId);
             console.log("button Id: " + button.getAttribute('id'));
