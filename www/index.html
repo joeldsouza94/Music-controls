@@ -254,13 +254,15 @@ function fail(error) {
                     entries[i].getMetadata(success, fail);                
                     createSongList(entries[i]);
                 }
-            }
-            var mylist = $('#songList');
+            }	
+            /*
+	    var mylist = $('#songList');
             var listitems = mylist.children('li').get();
             listitems.sort(function(a, b) {
                return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
             })
             $.each(listitems, function(idx, itm) { mylist.append(itm); });
+	    */
         }
 
         function readDirectoryEntriesFail(error) {
