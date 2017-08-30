@@ -58,7 +58,7 @@
     <div data-role="page" id="pageone">
 
         <div data-role="header">
-            <h1>Device is Ready:q</h1>
+            <h1>Device is Ready:w</h1>
         </div>
 
         <div data-role="main" class="ui-content">            
@@ -191,16 +191,6 @@
                 case 'music-controls-media-button' :
                     // Do something
                     console.log("music-controls-media-button: ");
-                    if (isPlaying) {
-                        pauseAudio();
-                        MusicControls.updateIsPlaying(false); // toggle the play/pause notification button
-                        MusicControls.updateDismissable(true);
-                    }
-                    else {
-                        playAudio(currSongId);
-                        MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
-                        MusicControls.updateDismissable(false);
-                    }
                     break;
                 case 'music-controls-headset-unplugged':
                     // Do something
@@ -213,6 +203,16 @@
                 case 'music-controls-media-button-headset-hook':
                     // Do something
                     console.log("music-controls-media-button-headset-hook: ");
+                    if (isPlaying) {
+                        pauseAudio();
+                        MusicControls.updateIsPlaying(false); // toggle the play/pause notification button
+                        MusicControls.updateDismissable(true);
+                    }
+                    else {
+                        playAudio(currSongId);
+                        MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
+                        MusicControls.updateDismissable(false);
+                    }
                     break;
                 case 'music-controls-media-button-volume-up':
                     // Do something
@@ -317,9 +317,9 @@
         }
 
         function playAudio(id) { 
-        if (id != "currSongId") {
-                currSongId = id;
-        } 
+            if (id != "currSongId") {
+                    currSongId = id;
+            } 
             if (currSongId != prevSongId) {
                 stopAudio();
             }
@@ -332,7 +332,10 @@
             console.log("Audio URL: " +url);
             track = audioElement.getAttribute('data-track');
             console.log("Audio track: " +track); 
-            document.getElementById('audio_track').innerHTML = track;   
+            document.getElementById('audio_track').innerHTML = track; 
+            onDeviceReadyMusicControls(track);
+            MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
+            MusicControls.updateDismissable(false);
                 
  
             // Play the audio file at url
@@ -375,9 +378,6 @@
                     );
                 }, 1000);
             }
-            //document.addEventListener("deviceready", onDeviceReadyMusicControls, false);
-            onDeviceReadyMusicControls(track);
-            MusicControls.updateIsPlaying(true);
         }
         
         
@@ -385,8 +385,8 @@
         function pauseAudio() {
             if (my_media) {
                 my_media.pause(); 
-                MusicControls.updateIsPlaying(false);
-                //onDeviceReadyMusicControls(track);
+                MusicControls.updateIsPlaying(false); // toggle the play/pause notification button
+                MusicControls.updateDismissable(true);
                 console.log("Audio paused");
             }
         }
