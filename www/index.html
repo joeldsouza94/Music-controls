@@ -338,6 +338,7 @@
             onDeviceReadyMusicControls(track);
             MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
             MusicControls.updateDismissable(false);
+            console.log("isPlaying: " + MusicControls.isPlaying);
                 
  
             // Play the audio file at url
@@ -389,6 +390,7 @@
                 my_media.pause(); 
                 MusicControls.updateIsPlaying(false); // toggle the play/pause notification button
                 MusicControls.updateDismissable(true);
+                console.log("isPlaying: " + MusicControls.isPlaying);
                 console.log("Audio paused");
             }
         }
