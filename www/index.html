@@ -113,8 +113,8 @@
                 dismissable : false,                         // optional, default : false
 
                 // hide previous/next/close buttons:
-                hasPrev   : false,      // show previous button, optional, default: true
-                hasNext   : false,      // show next button, optional, default: true
+                hasPrev   : true,      // show previous button, optional, default: true
+                hasNext   : true,      // show next button, optional, default: true
                 hasClose  : false,       // show close button, optional, default: false
 
                 // iOS only, optional
@@ -153,10 +153,12 @@
                 case 'music-controls-next':
                     // Do something
                     console.log("music-controls-next: ");
+                    nextAudio();
                     break;
                 case 'music-controls-previous':
                     // Do something
                     console.log("music-controls-previous: ");
+                    previousAudio();
                     break;
                 case 'music-controls-pause':
                     // Do something
@@ -412,6 +414,7 @@
                                 setAudioPosition((Math.round(position)) + " sec");
                                 if (Math.round(position) == (Math.round(duration) - 1)) {
                                     console.log("Song ended");
+                                    nextAudio();
                                 }
                             }
                         },
@@ -456,16 +459,20 @@
         
         function nextAudio() {
             console.log("nextAudio: ");
-            var songIdInc = Number(currSongId.substr(4,6)) + 1;    
-            currSongId = currSongId.substr(0, 4) + songIdInc;  
-            playAudio(currSongId);
+            if (Number(currSongId.substr(4,6)) < (j-1)) {
+                var songIdInc = Number(currSongId.substr(4,6)) + 1;    
+                currSongId = currSongId.substr(0, 4) + songIdInc;  
+                playAudio(currSongId);
+            }
         }
         
         function previousAudio() {
             console.log("previousAudio: ");
-            var songIdInc = Number(currSongId.substr(4,6)) - 1;  
-            currSongId = currSongId.substr(0, 4) + songIdInc;    
-            playAudio(currSongId);      
+            if (Number(currSongId.substr(4,6)) > 0) {
+                var songIdInc = Number(currSongId.substr(4,6)) - 1;  
+                currSongId = currSongId.substr(0, 4) + songIdInc;    
+                playAudio(currSongId); 
+            }     
         }
 
     </script>
