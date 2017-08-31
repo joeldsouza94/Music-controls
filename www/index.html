@@ -63,7 +63,8 @@
 
         <div data-role="main" class="ui-content">            
             <h3 id="audio_track" style="text-align: center;">Joel - Sound Of Silence</h3>
-            <h3 id="audio_position" style="text-align: center;">0 sec</h3>            
+            <h3 id="audio_position" style="text-align: center;">0 sec</h3>       
+            <h3 id="audio_duration" style="text-align: center;">0 sec</h3>           
             <button class="ui-btn" onclick="playAudio('currSongId');">Play</button> 
             <button class="ui-btn" onclick="pauseAudio();">Pause</button>             
             <button class="ui-btn" onclick="nextAudio();">Next</button>
@@ -337,7 +338,7 @@
                 stopAudio();
             }
             prevSongId = currSongId;
-            var running;
+            var duration;
             var audioElement = document.getElementById(currSongId);
             var url = audioElement.getAttribute('data-src');
             console.log("Audio URL: " +url);
@@ -385,6 +386,20 @@
             // Play audio
             my_media.play();
             console.log("Audio playing");
+            // Get duration
+            var counter = 0;
+            var timerDur = setInterval(function() {
+                counter = counter + 100;
+                if (counter > 2000) {
+                    clearInterval(timerDur);
+                }
+                var dur = my_media.getDuration();
+                if (dur > 0) {
+                    clearInterval(timerDur);
+                    document.getElementById('audio_duration').innerHTML = (dur) + " sec";
+                    duration = dur;
+                }
+            }, 100);
             // Update my_media position every second
             if (mediaTimer == null) {
                 mediaTimer = setInterval(function() {
@@ -394,9 +409,9 @@
                         function(position) {
                             if (position > -1) {
                                 setAudioPosition((Math.round(position)) + " sec");
-                            } 
-                            else {
-                                console.log("Song ended");
+                                if (position = duration) {
+                                    console.log("Song ended");
+                                }
                             }
                         },
                         // error callback
