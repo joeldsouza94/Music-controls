@@ -468,7 +468,7 @@
         
         function previousAudio() {
             console.log("previousAudio: ");
-            if (Number(currSongId.substr(4,6)) > 0) {
+            if (Number(currSongId.substr(4,6)) > 1) {
                 var songIdInc = Number(currSongId.substr(4,6)) - 1;  
                 currSongId = currSongId.substr(0, 4) + songIdInc;    
                 playAudio(currSongId); 
