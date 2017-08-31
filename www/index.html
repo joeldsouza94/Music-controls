@@ -334,11 +334,7 @@
                     currSongId = id;
             } 
             if (currSongId != prevSongId) {
-                my_media = null;
-                clearInterval(mediaTimer);
-                mediaTimer = null;
-                setAudioPosition("0 sec");
-                console.log("Audio stopped");
+                stopAudio();
             }
             prevSongId = currSongId;
             var running;
@@ -369,6 +365,7 @@
                     // status callback
                     function(status) {
                         console.log("playAudio():Audio Status: "+status);
+                        /*
                         if (status == 4) {
                             //alert("Stop Status: " + status);
                                                
@@ -381,6 +378,7 @@
                             MusicControls.updateIsPlaying(true); // toggle the play/pause notification button   
                             MusicControls.updateDismissable(false);
                         }
+                        */
                     }
                 );
             } // else play current audio
@@ -396,6 +394,9 @@
                         function(position) {
                             if (position > -1) {
                                 setAudioPosition((Math.round(position)) + " sec");
+                            } 
+                            else {
+                                console.log("Song ended");
                             }
                         },
                         // error callback
