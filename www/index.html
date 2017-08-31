@@ -65,8 +65,11 @@
             <h3 id="audio_track" style="text-align: center;">Joel - Sound Of Silence</h3>
             <h3 id="audio_position" style="text-align: center;">0 sec</h3>            
             <button class="ui-btn" onclick="playAudio('currSongId');">Play</button> 
-            <button class="ui-btn" onclick="pauseAudio();">Pause</button>
-            <button class="ui-btn" onclick="stopAudio();">Stop</button><br />
+            <button class="ui-btn" onclick="pauseAudio();">Pause</button>             
+            <button class="ui-btn" onclick="nextAudio();">Next</button>
+            <button class="ui-btn" onclick="previousAudio();">Previous</button>
+            <!--<button class="ui-btn" onclick="stopAudio();">Stop</button>-->
+            <br />
             <h1>Online song list: </h1>
             <button class="ui-btn" onclick="onDeviceReadyFile();">Refresh List</button>
             <button class="ui-btn" id="onlineSound1" data-src="http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3" onclick="playAudio('onlineSound1');">Rock guitar</button>
@@ -430,6 +433,24 @@
         // Set audio position
         function setAudioPosition(position) {
             document.getElementById('audio_position').innerHTML = position;
+        }
+        
+        function nextAudio() {
+            var songIdInc = Number(currSongId.substr(4,6)) + 1;    
+            currSongId = currSongId.substr(0, 4) + songIdInc;  
+            playAudio(currSongId);      
+            MusicControls.updateIsPlaying(true); // toggle the play/pause notification button         
+            MusicControls.updateDismissable(false);
+        }
+        
+        function previousAudio() {
+            var songIdInc = Number(currSongId.substr(4,6)) - 1;  
+            //alert("songIdInc: " + songIdInc);    
+            currSongId = currSongId.substr(0, 4) + songIdInc;    
+            //alert("nextSongId: " + currSongId);     
+            playAudio(currSongId);      
+            MusicControls.updateIsPlaying(true); // toggle the play/pause notification button   
+            MusicControls.updateDismissable(false);
         }
 
     </script>
