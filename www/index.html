@@ -358,6 +358,15 @@
                         console.log("playAudio():Audio Status: "+status);
                         if (status == 4) {
                             alert("Stop Status: " + status);
+                                               
+                            alert("currSongId: " + currSongId);
+                            var songIdInc = Number(currSongId.substr(4,6)) + 1;
+                            alert("songIdInc: " + songIdInc);
+                            currSongId = currSongId.substr(0, 4) + songIdInc; 
+                            alert("nextSongId: " + currSongId); 
+                            playAudio(currSongId);             
+                            MusicControls.updateIsPlaying(true); // toggle the play/pause notification button   
+                            MusicControls.updateDismissable(false);
                         }
                     }
                 );
