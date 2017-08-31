@@ -252,6 +252,12 @@
         function onDeviceReadyFile() {
             console.log("onDeviceReadyFile: ");
             console.log(cordova.file);
+            var ul = document.getElementById('songList');
+            if (ul) {
+                while (ul.firstChild) {
+                    ul.removeChild(ul.firstChild));
+                }
+            }
             console.log("externalRootDirectory/Download/: ");
             var systemUrl = cordova.file.externalRootDirectory + "Download/";
             console.log(systemUrl);
