@@ -334,7 +334,11 @@
                     currSongId = id;
             } 
             if (currSongId != prevSongId) {
-                stopAudio();
+                my_media = null;
+                clearInterval(mediaTimer);
+                mediaTimer = null;
+                setAudioPosition("0 sec");
+                console.log("Audio stopped");
             }
             prevSongId = currSongId;
             var running;
