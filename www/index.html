@@ -356,6 +356,9 @@
                     // status callback
                     function(status) {
                         console.log("playAudio():Audio Status: "+status);
+                        if (status == 4) {
+                            alert("Stop Status: " + status);
+                        }
                     }
                 );
             } // else play current audio
