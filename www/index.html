@@ -398,6 +398,7 @@
                     clearInterval(timerDur);
                     document.getElementById('audio_duration').innerHTML = (dur) + " sec";
                     duration = dur;
+                    console.log("Math.round(duration): " + Math.round(duration));
                 }
             }, 100);
             // Update my_media position every second
@@ -409,7 +410,7 @@
                         function(position) {
                             if (position > -1) {
                                 setAudioPosition((Math.round(position)) + " sec");
-                                if (position = Math.round(duration)) {
+                                if (Math.round(position) = Math.round(duration)) {
                                     console.log("Song ended");
                                 }
                             }
