@@ -64,7 +64,7 @@
         <div data-role="main" class="ui-content">            
             <h3 id="audio_track" style="text-align: center;">Joel - Sound Of Silence</h3>
             <h3 id="audio_position" style="text-align: center;">0 sec</h3>       
-            <h3 id="audio_duration" style="text-align: center;">0 sec</h3>
+            <!--<h3 id="audio_duration" style="text-align: center;">0 sec</h3>-->
             <h3 id="audio_formatted_duration" style="text-align: center;">0 sec</h3>                  
             <button class="ui-btn" onclick="playAudio('currSongId');">Play</button> 
             <button class="ui-btn" onclick="pauseAudio();">Pause</button>             
@@ -399,11 +399,11 @@
                 var dur = my_media.getDuration();
                 if (dur > 0) {
                     clearInterval(timerDur);
-                    document.getElementById('audio_duration').innerHTML = (dur) + " sec";
+                    //document.getElementById('audio_duration').innerHTML = (dur) + " sec";
                     duration = dur;
                     console.log("Math.round(duration): " + Math.round(duration));
                     var formattedDuration = fancyTimeFormat(duration);                 
-                    document.getElementById('audio_formatted_duration').innerHTML = (formattedDuration) + " sec";
+                    document.getElementById('audio_formatted_duration').innerHTML = formattedDuration;
                 }
             }, 100);
             // Update my_media position every second
@@ -414,11 +414,13 @@
                         // success callback
                         function(position) {
                             if (position > -1) {
-                                setAudioPosition((Math.round(position)) + " sec");
+                                //setAudioPosition((Math.round(position)) + " sec");
                                 if (Math.round(position) == (Math.round(duration) - 1)) {
                                     console.log("Song ended");
                                     nextAudio();
                                 }
+                                var formattedPosition = fancyTimeFormat(position);
+                                setAudioPosition(formattedPosition);
                             }
                         },
                         // error callback
@@ -457,7 +459,7 @@
 
         // Set audio position
         function setAudioPosition(position) {
-            document.getElementById('audio_position').innerHTML = position;
+            document.getElementById('audio_formatted_position').innerHTML = position;
         }
         
         function nextAudio() {
