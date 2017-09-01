@@ -412,7 +412,7 @@
                         // success callback
                         function(position) {
                             if (position > -1) {
-                                var formattedPosition = fancyTimeFormat(position);
+                                var formattedPosition = fancyTimeFormat(position+1);
                                 setAudioPosition(formattedPosition);
                                 //setAudioPosition((Math.round(position)) + " sec");
                                 if (Math.round(position) == (Math.round(duration) - 1)) {
