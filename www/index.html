@@ -64,7 +64,8 @@
         <div data-role="main" class="ui-content">            
             <h3 id="audio_track" style="text-align: center;">Joel - Sound Of Silence</h3>
             <h3 id="audio_position" style="text-align: center;">0 sec</h3>       
-            <h3 id="audio_duration" style="text-align: center;">0 sec</h3>           
+            <h3 id="audio_duration" style="text-align: center;">0 sec</h3>
+            <h3 id="audio_formatted_duration" style="text-align: center;">0 sec</h3>                  
             <button class="ui-btn" onclick="playAudio('currSongId');">Play</button> 
             <button class="ui-btn" onclick="pauseAudio();">Pause</button>             
             <button class="ui-btn" onclick="nextAudio();">Next</button>
@@ -401,6 +402,8 @@
                     document.getElementById('audio_duration').innerHTML = (dur) + " sec";
                     duration = dur;
                     console.log("Math.round(duration): " + Math.round(duration));
+                    var formattedDuration = fancyTimeFormat(duration);                 
+                    document.getElementById('audio_formatted_duration').innerHTML = (formattedDuration) + " sec";
                 }
             }, 100);
             // Update my_media position every second
@@ -474,6 +477,25 @@
                 playAudio(currSongId); 
             }     
         }
+        
+        function fancyTimeFormat(time)
+{   
+    // Hours, minutes and seconds
+    var hrs = ~~(time / 3600);
+    var mins = ~~((time % 3600) / 60);
+    var secs = time % 60;
+
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
+}
 
     </script>
 </body>
