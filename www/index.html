@@ -63,14 +63,12 @@
 
         <div data-role="main" class="ui-content">            
             <h3 id="audio_track" style="text-align: center;">Joel - Sound Of Silence</h3>
-            <h3 id="audio_formatted_position" style="text-align: center;">0 sec</h3>       
-            <!--<h3 id="audio_duration" style="text-align: center;">0 sec</h3>-->
+            <h3 id="audio_formatted_position" style="text-align: center;">0 sec</h3> 
             <h3 id="audio_formatted_duration" style="text-align: center;">0 sec</h3>                  
             <button class="ui-btn" onclick="playAudio('currSongId');">Play</button> 
             <button class="ui-btn" onclick="pauseAudio();">Pause</button>             
             <button class="ui-btn" onclick="nextAudio();">Next</button>
             <button class="ui-btn" onclick="previousAudio();">Previous</button>
-            <!--<button class="ui-btn" onclick="stopAudio();">Stop</button>-->
             <br />
             <h1>Online song list: </h1>
             <button class="ui-btn" id="onlineSound1" data-src="http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3" onclick="playAudio('onlineSound1');">Rock guitar</button>
@@ -386,9 +384,6 @@
                     }
                 );
             } // else play current audio
-            // Play audio
-            my_media.play();
-            console.log("Audio playing");
             // Get duration
             var counter = 0;
             var timerDur = setInterval(function() {
@@ -406,6 +401,9 @@
                     document.getElementById('audio_formatted_duration').innerHTML = formattedDuration;
                 }
             }, 100);
+            // Play audio
+            my_media.play();
+            console.log("Audio playing");
             // Update my_media position every second
             if (mediaTimer == null) {
                 mediaTimer = setInterval(function() {
@@ -481,23 +479,23 @@
         }
         
         function fancyTimeFormat(time)
-{   
-    // Hours, minutes and seconds
-    var hrs = ~~(time / 3600);
-    var mins = ~~((time % 3600) / 60);
-    var secs = ~~(time % 60);
+        {   
+            // Hours, minutes and seconds
+            var hrs = ~~(time / 3600);
+            var mins = ~~((time % 3600) / 60);
+            var secs = ~~(time % 60);
 
-    // Output like "1:01" or "4:03:59" or "123:03:59"
-    var ret = "";
+            // Output like "1:01" or "4:03:59" or "123:03:59"
+            var ret = "";
 
-    if (hrs > 0) {
-        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-    }
+            if (hrs > 0) {
+                ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+            }
 
-    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-    ret += "" + secs;
-    return ret;
-}
+            ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+            ret += "" + secs;
+            return ret;
+        }
 
     </script>
 </body>
