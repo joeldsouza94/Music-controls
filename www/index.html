@@ -475,10 +475,11 @@
                     );
                 }, 1000);
             }    
-            // SeekTo to 10 seconds after 5 seconds
-            setTimeout(function() {
-                my_media.seekTo(20000);
-            }, 10000);
+            $('#slider').on('change',function() {
+                console.log(progressBar.getValue('#slider'));
+                progressBar.setValue('#slider', progressBar.getValue('#slider'));
+                my_media.seekTo(progressBar.getValue('#slider'));
+            }); 
         }
         
         
