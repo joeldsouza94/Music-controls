@@ -70,15 +70,12 @@
         }
 
         $(document).ready(function(){ 
-            $('<input>').appendTo('[ data-role="progressBarContainer"]').attr({'name':'slider','id':'slider','data-highlight':'true','min':'0','max':'100','value':'0','type':'range','disabled':'true'}).slider({
+            $('<input>').appendTo('[ data-role="progressBarContainer"]').attr({'name':'slider','id':'slider','data-highlight':'true','min':'0','max':'100','value':'0','type':'range'}).slider({
                 create: function( event, ui ) {
                     $(this).parent().find('input').css('margin-left','-9999px'); // Fix for some FF versions
                     $(this).parent().find('.ui-slider-track').css('margin','0 15px 0 15px');
                     $(this).parent().find('.ui-slider-handle').hide();
                 }
-            });     
-            $('#slider').on('change',function() {
-                console.log(progressBar.getValue('#slider'));
             }); 
         });  
 
@@ -477,7 +474,11 @@
                         }
                     );
                 }, 1000);
-            }
+            }    
+            $('#slider').on('change',function() {
+                console.log(progressBar.getValue('#slider'));
+                my_media.seekTo(progressBar.getValue('#slider'));
+            }); 
         }
         
         
