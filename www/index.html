@@ -459,7 +459,7 @@
                         // success callback
                         function(position) {
                             if (position > -1) {
-                                progressBar.setValue('#slider',position);
+                                progressBar.setValue('#slider', (position+1));
                                 var formattedPosition = fancyTimeFormat(position+1);
                                 setAudioPosition(formattedPosition);
                                 //setAudioPosition((Math.round(position)) + " sec");
@@ -496,6 +496,7 @@
             if (my_media) {
                 my_media.stop();
                 my_media = null;
+                progressBar.setValue('#slider', 0);
                 clearInterval(mediaTimer);
                 mediaTimer = null;
                 setAudioPosition("0 sec");
