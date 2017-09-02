@@ -331,6 +331,9 @@
 
         function readDirectoryEntriesSuccess(entries) {
             console.log("readDirectoryEntriesSuccess: ");
+            entries.sort(function(a, b) {
+               return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+            })
             var i;
             for (i=0; i<entries.length; i++) {
                 if(entries[i].name.indexOf(".mp3") != -1){
