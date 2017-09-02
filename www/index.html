@@ -475,10 +475,10 @@
                     );
                 }, 1000);
             }    
-            $('#slider').on('change',function() {
-                console.log(progressBar.getValue('#slider'));
-                my_media.seekTo(progressBar.getValue('#slider'));
-            }); 
+            // SeekTo to 10 seconds after 5 seconds
+            setTimeout(function() {
+                my_media.seekTo(20000);
+            }, 10000);
         }
         
         
