@@ -462,6 +462,7 @@
                         function(position) {
                             if (position > -1) {
                                 // Setter
+                                console.log("position: " + position);
                                 $( "#slider" ).slider( "option", "value", position );            
                                 // Getter
                                 var value = $( "#slider" ).slider( "option", "value" );
@@ -483,7 +484,8 @@
                     );
                 }, 1000);
             } 
-            $( "#slider" ).on( "slidechange", function( event, ui ) {     
+            $( "#slider" ).on( "slidechange", function( event, ui ) {  
+                clearInterval(mediaTimer);   
                 // Getter
                 var value = $( "#slider" ).slider( "option", "value" );
                 console.log("slidechange value: " + value);
