@@ -68,7 +68,7 @@
             // Getter
             var max = $( "#slider" ).slider( "option", "max" );
             // Setter
-            $( "#slider" ).slider( "option", "value", 10 );            
+            $( "#slider" ).slider( "option", "value", 10.433 );            
             // Getter
             var value = $( "#slider" ).slider( "option", "value" );
             console.log("value: " + value);
@@ -81,10 +81,13 @@
                 var value = $( "#slider" ).slider( "option", "value" );
                 console.log("setInterval value: " + value);
             }
-            $( "#slider" ).on( "slidechange", function( event, ui ) {     
+            $( "#slider" ).on( "slide", function( event, ui ) { 
+                clearInterval(myVar);    
                 // Getter
                 var value = $( "#slider" ).slider( "option", "value" );
                 console.log("value: " + value);
+
+                myVar = setInterval(myTimer ,1000);
             } );
             */
 
@@ -455,7 +458,8 @@
             console.log("Audio playing");
             // Update my_media position every second
             if (mediaTimer == null) {
-                mediaTimer = setInterval(function() {
+                mediaTimer = setInterval(timer, 1000);
+                    function timer() {
                     // get my_media position
                     my_media.getCurrentPosition(
                         // success callback
@@ -463,7 +467,8 @@
                             if (position > -1) {
                                 // Setter
                                 console.log("position: " + position);
-                                $( "#slider" ).slider( "option", "value", position );            
+                                var value = $( "#slider" ).slider( "option", "value" );
+                                $( "#slider" ).slider( "option", "value", value + 1);            
                                 // Getter
                                 var value = $( "#slider" ).slider( "option", "value" );
                                 console.log("position value: " + value);
@@ -482,14 +487,15 @@
                             setAudioPosition("Error: " + e);
                         }
                     );
-                }, 1000);
+                }
             } 
-            $( "#slider" ).on( "slidechange", function( event, ui ) {  
+            $( "#slider" ).on( "slide", function( event, ui ) {  
                 clearInterval(mediaTimer);   
                 // Getter
                 var value = $( "#slider" ).slider( "option", "value" );
                 console.log("slidechange value: " + value);
                 my_media.seekTo(value);
+                mediaTimer = setInterval(timer, 1000);
             } );   
         }
         
