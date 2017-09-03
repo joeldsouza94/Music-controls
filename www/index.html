@@ -37,6 +37,10 @@
     * Create your own at http://cspisawesome.com
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <style>#slider { margin: 10px; }  </style>
 
     <!-- Include jQuery Mobile stylesheets -->
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">  <!-- Include the jQuery library -->
@@ -44,52 +48,48 @@
     <!-- Include the jQuery Mobile library -->
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
   
+    
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
     <script>
         $(document).ready(function(){            
-            $(".ui-content").css("background-color", "#4B946A");    
-        });
-    </script>
+            $(".ui-content").css("background-color", "#4B946A");   
 
 
-    <script>
-  
-        var progressBar = {
-            setMaxValue:function(id, value) {
-                $(id).attr('max',value);
-                $(id).slider("refresh");
-            },
-            setValue:function(id, value) {
-                $(id).val(value);
-                $(id).slider("refresh");
-            },
-            
-            getValue:function(id) {
-                return $(id).val();
+
+            $( "#slider" ).slider();
+            /*
+            // Setter
+            $( "#slider" ).slider( "option", "max", 50 );
+            // Getter
+            var max = $( "#slider" ).slider( "option", "max" );
+            console.log("max: " + max);
+            // Getter
+            var max = $( "#slider" ).slider( "option", "max" );
+            // Setter
+            $( "#slider" ).slider( "option", "value", 10 );            
+            // Getter
+            var value = $( "#slider" ).slider( "option", "value" );
+            console.log("value: " + value);
+            var myVar = setInterval(myTimer ,1000);
+            function myTimer() {
+                var value = $( "#slider" ).slider( "option", "value" );
+                // Setter
+                $( "#slider" ).slider( "option", "value", value + 1 );            
+                // Getter
+                var value = $( "#slider" ).slider( "option", "value" );
+                console.log("setInterval value: " + value);
             }
-            
-        }
+            $( "#slider" ).on( "slidechange", function( event, ui ) {     
+                // Getter
+                var value = $( "#slider" ).slider( "option", "value" );
+                console.log("value: " + value);
+            } );
+            */
 
-        $(document).ready(function(){ 
-            $('<input>').appendTo('[ data-role="progressBarContainer"]').attr({'name':'slider','id':'slider','data-highlight':'true','min':'0','max':'100','value':'0','type':'range'}).slider({
-                create: function( event, ui ) {
-                    $(this).parent().find('input').css('margin-left','-9999px'); // Fix for some FF versions
-                    $(this).parent().find('.ui-slider-track').css('margin','0 15px 0 15px');
-                    $(this).parent().find('.ui-slider-handle').hide();
-                }
-            }); 
-        });  
-
-/*
-        $(document).ready(function(){   
-    // Test
-        progressBar.setMaxValue('#slider',32);
-        //progressBar.setValue('#slider',8);//
-        
         });
-        */
-
     </script>
-
 
     <title>Hello World</title>
 </head>
@@ -105,7 +105,7 @@
         <div data-role="main" class="ui-content">            
             <h3 id="audio_track" style="text-align: center;">Joel - Sound Of Silence</h3>
             <h3 id="audio_formatted_position" style="text-align: center;">0 sec</h3>
-            <div data-role="progressBarContainer"></div> 
+            <div id="slider"></div>
             <h3 id="audio_formatted_duration" style="text-align: center;">0 sec</h3>                  
             <button class="ui-btn" onclick="playAudio('currSongId');">Play</button> 
             <button class="ui-btn" onclick="pauseAudio();">Pause</button>             
@@ -437,7 +437,11 @@
                 var dur = my_media.getDuration();
                 if (dur > 0) {
                     clearInterval(timerDur);
-                    progressBar.setMaxValue('#slider', dur);
+                    // Setter
+                    $( "#slider" ).slider( "option", "max", dur );
+                    // Getter
+                    var max = $( "#slider" ).slider( "option", "max" );
+                    console.log("duration max: " + max);
                     //document.getElementById('audio_duration').innerHTML = (dur) + " sec";
                     duration = dur;
                     console.log("Math.round(duration): " + Math.round(duration));
@@ -457,7 +461,11 @@
                         // success callback
                         function(position) {
                             if (position > -1) {
-                                progressBar.setValue('#slider', (position+1));
+                                // Setter
+                                $( "#slider" ).slider( "option", "value", position );            
+                                // Getter
+                                var value = $( "#slider" ).slider( "option", "value" );
+                                console.log("position value: " + value);
                                 var formattedPosition = fancyTimeFormat(position+1);
                                 setAudioPosition(formattedPosition);
                                 //setAudioPosition((Math.round(position)) + " sec");
@@ -474,12 +482,13 @@
                         }
                     );
                 }, 1000);
-            }    
-            $('#slider').on('change',function() {
-                console.log(progressBar.getValue('#slider'));
-                progressBar.setValue('#slider', progressBar.getValue('#slider'));
-                my_media.seekTo(progressBar.getValue('#slider'));
-            }); 
+            } 
+            $( "#slider" ).on( "slidechange", function( event, ui ) {     
+                // Getter
+                var value = $( "#slider" ).slider( "option", "value" );
+                console.log("slidechange value: " + value);
+                my_media.seekTo(value);
+            } );   
         }
         
         
@@ -499,7 +508,6 @@
             if (my_media) {
                 my_media.stop();
                 my_media = null;
-                progressBar.setValue('#slider', 0);
                 clearInterval(mediaTimer);
                 mediaTimer = null;
                 setAudioPosition("0 sec");
