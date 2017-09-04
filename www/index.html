@@ -441,15 +441,15 @@
                 var dur = my_media.getDuration();
                 if (dur > 0) {
                     clearInterval(timerDur);
-                    /*
-                    $( "#slider" ).slider();
+                    
+                    //$( "#slider" ).slider();
                     // Setter
                     $( "#slider" ).slider( "option", "max", dur );
                     // Getter
                     var max = $( "#slider" ).slider( "option", "max" );
                     console.log("duration max: " + max);
                     //document.getElementById('audio_duration').innerHTML = (dur) + " sec";
-                    */
+                    
                     duration = dur;
                     console.log("Math.round(duration): " + Math.round(duration));
                     var formattedDuration = fancyTimeFormat(duration);                 
@@ -496,16 +496,17 @@
                     );
                 }
             } 
-            /*
+            
             $( "#slider" ).on( "slide", function( event, ui ) {  
                 clearInterval(mediaTimer);   
+                mediaTimer = null;
                 // Getter
                 var value = $( "#slider" ).slider( "option", "value" );
                 console.log("slidechange value: " + value);
                 my_media.seekTo(value);
                 mediaTimer = setInterval(timer, 1000);
             } ); 
-            */  
+              
         }
         
         
