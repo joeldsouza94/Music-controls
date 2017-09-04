@@ -50,6 +50,7 @@
   
     
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="jsmediatags.min.js"></script>
 
 
     <script>
@@ -90,6 +91,22 @@
                 myVar = setInterval(myTimer ,1000);
             } );
             */
+            
+            // As a global Object
+            var jsmediatags = window.jsmediatags;
+            alert(jsmediatags);
+            
+            // From remote host
+            jsmediatags.read("http://www.example.com/music-file.mp3", {
+              onSuccess: function(tag) {                
+                alert("tag: ");
+                alert(tag);
+              },
+              onError: function(error) {              
+                alert("error: ");
+                alert(error);
+              }
+            });
 
         });
     </script>
