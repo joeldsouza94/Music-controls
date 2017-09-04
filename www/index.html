@@ -571,7 +571,7 @@
                 // Getter
                 var value = $( "#slider" ).slider( "option", "value" );
                 console.log("slidechange value: " + value);
-                stopAudio();
+                pauseAudio();
                 my_media.seekTo(value);  
                 playAudio(currSongId); 
                 
