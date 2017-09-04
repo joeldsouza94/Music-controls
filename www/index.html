@@ -133,6 +133,7 @@
     <script type="text/javascript" src="cordova.js"></script>
 
     <script type="text/javascript">
+        $( "#slider" ).slider();
         var my_media = null;
         var mediaTimer = null;
         var prevSongId = null;
@@ -440,6 +441,7 @@
                 var dur = my_media.getDuration();
                 if (dur > 0) {
                     clearInterval(timerDur);
+                    /*
                     $( "#slider" ).slider();
                     // Setter
                     $( "#slider" ).slider( "option", "max", dur );
@@ -447,6 +449,7 @@
                     var max = $( "#slider" ).slider( "option", "max" );
                     console.log("duration max: " + max);
                     //document.getElementById('audio_duration').innerHTML = (dur) + " sec";
+                    */
                     duration = dur;
                     console.log("Math.round(duration): " + Math.round(duration));
                     var formattedDuration = fancyTimeFormat(duration);                 
@@ -466,7 +469,8 @@
                         // success callback
                         function(position) {
                             if (position > -1) {
-                                $( "#slider" ).slider();   
+                                
+                                //$( "#slider" ).slider();   
                                 // Setter
                                 console.log("position: " + position);
                                 var value = $( "#slider" ).slider( "option", "value" );
@@ -474,6 +478,7 @@
                                 // Getter
                                 var value = $( "#slider" ).slider( "option", "value" );
                                 console.log("position value: " + value);
+                                
                                 var formattedPosition = fancyTimeFormat(position+1);
                                 setAudioPosition(formattedPosition);
                                 //setAudioPosition((Math.round(position)) + " sec");
