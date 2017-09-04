@@ -50,7 +50,6 @@
   
     
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="jsmediatags.min.js"></script>
 
 
     <script>
@@ -59,7 +58,7 @@
 
 
 
-            $( "#slider" ).slider();
+            //$( "#slider" ).slider();
             /*
             // Setter
             $( "#slider" ).slider( "option", "max", 50 );
@@ -91,24 +90,6 @@
                 myVar = setInterval(myTimer ,1000);
             } );
             */
-            
-            // As a global Object
-            //var jsmediatags = window.jsmediatags;
-            // As a CommonJS Module
-            var jsmediatags = require("jsmediatags");
-            alert(jsmediatags);
-            
-            // From remote host
-            jsmediatags.read("http://www.example.com/music-file.mp3", {
-              onSuccess: function(tag) {                
-                alert("tag: ");
-                alert(tag);
-              },
-              onError: function(error) {              
-                alert("error: ");
-                alert(error);
-              }
-            });
 
         });
     </script>
@@ -459,6 +440,7 @@
                 var dur = my_media.getDuration();
                 if (dur > 0) {
                     clearInterval(timerDur);
+                    $( "#slider" ).slider();
                     // Setter
                     $( "#slider" ).slider( "option", "max", dur );
                     // Getter
@@ -484,6 +466,7 @@
                         // success callback
                         function(position) {
                             if (position > -1) {
+                                $( "#slider" ).slider();   
                                 // Setter
                                 console.log("position: " + position);
                                 var value = $( "#slider" ).slider( "option", "value" );
@@ -508,6 +491,7 @@
                     );
                 }
             } 
+            /*
             $( "#slider" ).on( "slide", function( event, ui ) {  
                 clearInterval(mediaTimer);   
                 // Getter
@@ -515,7 +499,8 @@
                 console.log("slidechange value: " + value);
                 my_media.seekTo(value);
                 mediaTimer = setInterval(timer, 1000);
-            } );   
+            } ); 
+            */  
         }
         
         
