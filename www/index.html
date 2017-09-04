@@ -496,16 +496,6 @@
                     );
                 }
             } 
-            
-            $( "#slider" ).on( "slide", function( event, ui ) {  
-                clearInterval(mediaTimer);   
-                mediaTimer = null;
-                // Getter
-                var value = $( "#slider" ).slider( "option", "value" );
-                console.log("slidechange value: " + value);
-                my_media.seekTo(value);
-                mediaTimer = setInterval(timer, 1000);
-            } ); 
               
         }
         
@@ -575,6 +565,19 @@
             return ret;
         }
 
+        $(document).ready(function(){
+            
+            $( "#slider" ).on( "slide", function( event, ui ) {  
+                // Getter
+                var value = $( "#slider" ).slider( "option", "value" );
+                console.log("slidechange value: " + value);
+                stopAudio();
+                my_media.seekTo(value);  
+                playAudio(currSongId); 
+                
+            } ); 
+
+        });
     </script>
 </body>
 
