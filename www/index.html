@@ -569,6 +569,7 @@
             
             $( "#slider" ).on( "slide", function( event, ui ) {  
                 // Getter
+                console.log("slidechange ui.value: " + ui.value);
                 var value = $( "#slider" ).slider( "option", "value" );
                 console.log("slidechange value: " + value);
                 //stopAudio();
