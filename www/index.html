@@ -571,9 +571,12 @@
                 // Getter
                 var value = $( "#slider" ).slider( "option", "value" );
                 console.log("slidechange value: " + value);
-                pauseAudio();
+                //stopAudio();
+                clearInterval(mediaTimer);
+                mediaTimer = null;
+                mediaTimer = setInterval(timer, 1000);
                 my_media.seekTo(value);  
-                playAudio(currSongId); 
+                //playAudio(currSongId); 
                 
             } ); 
 
