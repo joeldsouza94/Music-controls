@@ -570,10 +570,10 @@
             $( "#slider" ).on( "slide", function( event, ui ) {  
                 // Getter
                 console.log("slidechange ui.value: " + ui.value);
-                var value = $( "#slider" ).slider( "option", "value" );
-                console.log("slidechange value: " + value);
+                //var value = $( "#slider" ).slider( "option", "value" );
+                //console.log("slidechange value: " + value);
                 //stopAudio();
-                my_media.seekTo(10 * 1000);  
+                my_media.seekTo(ui.value * 1000);  
                 //playAudio(currSongId); 
                 
             } ); 
