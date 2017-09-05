@@ -572,10 +572,10 @@
                 var value = $( "#slider" ).slider( "option", "value" );
                 console.log("slidechange value: " + value);
                 //stopAudio();
-                clearInterval(mediaTimer);
-                mediaTimer = null;
-                mediaTimer = setInterval(timer, 1000);
-                my_media.seekTo(value);  
+                //clearInterval(mediaTimer);
+                //mediaTimer = null;
+                //mediaTimer = setInterval(timer, 1000);
+                my_media.seekTo(value * 1000);  
                 //playAudio(currSongId); 
                 
             } ); 
