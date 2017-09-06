@@ -143,6 +143,7 @@
         var j = 1;
         var songId; 
         var track;
+        var isPaused = true;
 
         //document.addEventListener("deviceready", onDeviceReadyMusicControls, false);
         function onDeviceReadyMusicControls(title) {
@@ -255,6 +256,12 @@
                 case 'music-controls-media-button-headset-hook':
                     // Do something
                     console.log("music-controls-media-button-headset-hook: ");
+                    if (isPaused) {
+                        playAudio(currSongId);
+                    }
+                    else {
+                        pauseAudio();
+                    }
                     /*
                     if (MusicControls.data.isPlaying) {
                         pauseAudio();
@@ -459,6 +466,7 @@
             setAudioPosition("0:01");
             // Play audio
             my_media.play();
+            isPaused = false;
             console.log("Audio playing");
             // Update my_media position every second
             if (mediaTimer == null) {
@@ -503,7 +511,8 @@
         // Pause audio
         function pauseAudio() {
             if (my_media) {
-                my_media.pause(); 
+                my_media.pause();
+                isPaused = true;
                 MusicControls.updateIsPlaying(false); // toggle the play/pause notification button
                 MusicControls.updateDismissable(true);
                 console.log("isPlaying: " + MusicControls.isPlaying);
