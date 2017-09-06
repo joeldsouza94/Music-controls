@@ -133,7 +133,10 @@
     <script type="text/javascript" src="cordova.js"></script>
 
     <script type="text/javascript">
-        $( "#slider" ).slider();
+        $( "#slider" ).slider({
+            range: true
+        });
+        $('.ui-slider-handle').hide();
         var my_media = null;
         var mediaTimer = null;
         var prevSongId = null;
