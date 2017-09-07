@@ -342,7 +342,8 @@
             console.log("externalRootDirectory/Download/: ");
             var systemUrl = cordova.file.externalRootDirectory + "Download/";
             console.log(systemUrl);
-            window.resolveLocalFileSystemURL(systemUrl, getDirectorySuccess, getDirectoryError);
+            getDirectorySuccess(root);
+            //window.resolveLocalFileSystemURL(systemUrl, getDirectorySuccess, getDirectoryError);
         }
 
         function getDirectorySuccess(dirEntry) {
@@ -512,7 +513,7 @@
                                 console.log("position: " + position);
                                 //var value = $( "#slider" ).slider( "option", "value" );
                                 $( "#slider" ).slider( "option", "value", position); 
-                                $('.ui-slider-range').css('background','yellow');           
+                                //$('.ui-slider-range').css('background','yellow');           
                                 // Getter
                                 var value = $( "#slider" ).slider( "option", "value" );
                                 console.log("position value: " + value);
