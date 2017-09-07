@@ -137,7 +137,6 @@
             range: true
         });
         $('.ui-slider-handle').hide();
-        $('.ui-slider-range').css('background','yellow');
         var my_media = null;
         var mediaTimer = null;
         var prevSongId = null;
@@ -331,9 +330,6 @@
                     var root = root.fullPath;
                     console.log("root fullPath: ");
                     console.log(root);
-                    var root = root.toURL();
-                    console.log("root toURL: ");
-                    console.log(root);
                  },
                  function(error){
                     console.log('File System Error: ' + error.code);
@@ -342,7 +338,7 @@
             console.log("externalRootDirectory/Download/: ");
             var systemUrl = cordova.file.externalRootDirectory + "Download/";
             console.log(systemUrl);
-            window.resolveLocalFileSystemURL(systemUrl, getDirectorySuccess, getDirectoryError);
+            window.resolveLocalFileSystemURL(root, getDirectorySuccess, getDirectoryError);
         }
 
         function getDirectorySuccess(dirEntry) {
@@ -504,7 +500,8 @@
                                 // Setter
                                 console.log("position: " + position);
                                 //var value = $( "#slider" ).slider( "option", "value" );
-                                $( "#slider" ).slider( "option", "value", position);            
+                                $( "#slider" ).slider( "option", "value", position); 
+                                $('.ui-slider-range').css('background','yellow');           
                                 // Getter
                                 var value = $( "#slider" ).slider( "option", "value" );
                                 console.log("position value: " + value);
