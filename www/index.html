@@ -333,6 +333,7 @@
                     //root = root.fullPath;
                     console.log("root fullPath: ");
                     console.log(root);
+                    getDirectorySuccess(root);
                  },
                  function(error){
                     console.log('File System Error: ' + error.code);
@@ -342,7 +343,6 @@
             console.log("externalRootDirectory/Download/: ");
             var systemUrl = cordova.file.externalRootDirectory + "Download/";
             console.log(systemUrl);
-            getDirectorySuccess(root);
             //window.resolveLocalFileSystemURL(systemUrl, getDirectorySuccess, getDirectoryError);
         }
 
