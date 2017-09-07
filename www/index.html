@@ -364,6 +364,9 @@
             entries.sort();
             var i;
             for (i=0; i<entries.length; i++) {
+                console.log(entries[i]);
+                console.log(entries[i].isDirectory);
+                console.log(entries[i].isFile);
                 if (entries[i].isDirectory === true) {
                     console.log("isDirectory");
                     getDirectorySuccess(entries[i].fullPath);
