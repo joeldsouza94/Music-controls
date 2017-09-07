@@ -369,7 +369,7 @@
                 console.log(entries[i].isFile);
                 if (entries[i].isDirectory === true) {
                     console.log("isDirectory");
-                    getDirectorySuccess(entries[i].fullPath);
+                    getDirectorySuccess(entries[i]);
                 }
                 else if(entries[i].isFile === true && entries[i].name.indexOf(".mp3") != -1){
                     songList[i] = entries[i].toURL();
