@@ -137,6 +137,7 @@
             range: true
         });
         $('.ui-slider-handle').hide();
+        $('.ui-slider-range').css('background','yellow');
         var my_media = null;
         var mediaTimer = null;
         var prevSongId = null;
@@ -320,6 +321,24 @@
                     ul.removeChild(ul.firstChild);
                 }
             }
+            window.requestFileSystem(
+                 LocalFileSystem.PERSISTENT,
+                 0,
+                 function(fileSystem){
+                    var root = fileSystem.root;
+                    console.log("root: ");
+                    console.log(root);
+                    var root = root.fullPath;
+                    console.log("root fullPath: ");
+                    console.log(root);
+                    var root = root.toURL();
+                    console.log("root toURL: ");
+                    console.log(root);
+                 },
+                 function(error){
+                    console.log('File System Error: ' + error.code);
+                 }
+              );
             console.log("externalRootDirectory/Download/: ");
             var systemUrl = cordova.file.externalRootDirectory + "Download/";
             console.log(systemUrl);
