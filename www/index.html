@@ -529,7 +529,8 @@
                                 var formattedPosition = fancyTimeFormat(position);
                                 setAudioPosition(formattedPosition);
                                 //setAudioPosition((Math.round(position)) + " sec");
-                                if (Math.round(position) == (Math.round(duration) - 1)) {
+                                //if (Math.round(position) == (Math.round(duration) - 1)) {
+                                if (Math.round(position) == Math.round(duration)) {
                                     console.log("Song ended");
                                     nextAudio();
                                 }
@@ -618,6 +619,7 @@
             
             $( "#slider" ).on( "slide", function( event, ui ) {  
                 // Getter
+                $( "#slider" ).slider("value", ui.value);
                 console.log("slidechange ui.value: " + ui.value);
                 //var value = $( "#slider" ).slider( "option", "value" );
                 //console.log("slidechange value: " + value);
