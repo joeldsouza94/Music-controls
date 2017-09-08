@@ -518,13 +518,13 @@
                                 
                                 //$( "#slider" ).slider();   
                                 // Setter
-                                alert("position: " + position);
+                                console.log("position: " + position);
                                 //var value = $( "#slider" ).slider( "option", "value" );
                                 $( "#slider" ).slider("value", position); 
                                 //$('.ui-slider-range').css('background','yellow');           
                                 // Getter
                                 var value = $( "#slider" ).slider( "option", "value" );
-                                alert("position value: " + value);
+                                console.log("position value: " + value);
                                 
                                 var formattedPosition = fancyTimeFormat(position+1);
                                 setAudioPosition(formattedPosition);
@@ -612,7 +612,7 @@
             ret += "" + secs;
             return ret;
         }
-/*
+
         $(document).ready(function(){
             
             $( "#slider" ).on( "slide", function( event, ui ) {  
@@ -628,7 +628,7 @@
         
         
         });
-  */      
+        
         function headsetButtonPlaypauseOrNext() {   
             var playpauseOrNext = document.getElementById('playpauseOrNext').getAttribute('data-playpauseOrNext'); 
             if (playpauseOrNext == "playPause") {            
