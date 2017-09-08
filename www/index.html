@@ -515,11 +515,13 @@
                         // success callback
                         function(position) {
                             if (position > -1) {
-                                            $( "#slider" ).on( "slide", function( event, ui ) {  
-                //$( "#slider" ).slider("value", ui.value);
-                console.log("slidechange ui.value: " + ui.value);
-                my_media.seekTo(ui.value * 1000); 
-            } ); 
+                                var formattedPosition = fancyTimeFormat(position);
+                                setAudioPosition(formattedPosition);
+                                $( "#slider" ).on( "slide", function( event, ui ) {  
+                                    //$( "#slider" ).slider("value", ui.value);
+                                    console.log("slidechange ui.value: " + ui.value);
+                                    my_media.seekTo(ui.value * 1000); 
+                                } ); 
                                 //$( "#slider" ).slider();   
                                 // Setter
                                 console.log("position: " + position);
@@ -530,11 +532,9 @@
                                 var value = $( "#slider" ).slider( "option", "value" );
                                 console.log("position value: " + value);
                                 
-                                var formattedPosition = fancyTimeFormat(position);
-                                setAudioPosition(formattedPosition);
                                 //setAudioPosition((Math.round(position)) + " sec");
                                 //if (Math.round(position) == (Math.round(duration) - 1)) {
-                                if (Math.round(position) >= Math.round(duration)) {
+                                if (position >= duration) {
                                     console.log("Song ended");
                                     nextAudio();
                                 }
