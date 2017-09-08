@@ -519,6 +519,8 @@
                                 setAudioPosition(formattedPosition);
                                 $( "#slider" ).on( "slide", function( event, ui ) {  
                                     //$( "#slider" ).slider("value", ui.value);
+                                    formattedPosition = fancyTimeFormat(ui.value);
+                                    setAudioPosition(formattedPosition);
                                     console.log("slidechange ui.value: " + ui.value);
                                     my_media.seekTo(ui.value * 1000); 
                                 } ); 
@@ -534,7 +536,7 @@
                                 
                                 //setAudioPosition((Math.round(position)) + " sec");
                                 //if (Math.round(position) == (Math.round(duration) - 1)) {
-                                if (position >= duration) {
+                                if (position >= ~~(duration)) {
                                     console.log("Song ended");
                                     nextAudio();
                                 }
