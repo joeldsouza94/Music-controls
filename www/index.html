@@ -522,13 +522,13 @@
                                     console.log("slidechange ui.value: " + ui.value);
                                     my_media.seekTo(ui.value * 1000); 
                                 } ); 
-                                var formattedPosition = fancyTimeFormat(position);
+                                var formattedPosition = fancyTimeFormat(Math.ceil(position));
                                 setAudioPosition(formattedPosition);
                                 //$( "#slider" ).slider();   
                                 // Setter
                                 console.log("position: " + position);
                                 //var value = $( "#slider" ).slider( "option", "value" );
-                                $( "#slider" ).slider("value", position); 
+                                $( "#slider" ).slider("value", Math.ceil(position)); 
                                 //$('.ui-slider-range').css('background','yellow');           
                                 // Getter
                                 var value = $( "#slider" ).slider( "option", "value" );
@@ -536,7 +536,7 @@
                                 
                                 //setAudioPosition((Math.round(position)) + " sec");
                                 //if (Math.round(position) == (Math.round(duration) - 1)) {
-                                if (Math.ceil(position) >= duration) {
+                                if (Math.round(position) >= duration) {
                                     console.log("Song ended");
                                     nextAudio();
                                 }
