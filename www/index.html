@@ -536,7 +536,7 @@
                                 
                                 //setAudioPosition((Math.round(position)) + " sec");
                                 //if (Math.round(position) == (Math.round(duration) - 1)) {
-                                if (Math.round(position) >= duration) {
+                                if (Math.ceil(position) > duration) {
                                     console.log("Song ended");
                                     nextAudio();
                                 }
