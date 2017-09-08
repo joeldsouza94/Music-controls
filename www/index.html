@@ -566,6 +566,7 @@
                 my_media = null;
                 clearInterval(mediaTimer);
                 mediaTimer = null;
+                $( "#slider" ).slider("value", 0);
                 setAudioPosition("0:00");
                 console.log("Audio stopped");
             }
