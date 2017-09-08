@@ -113,7 +113,8 @@
             <button class="ui-btn" onclick="playAudio('currSongId');">Play</button> 
             <button class="ui-btn" onclick="pauseAudio();">Pause</button>             
             <button class="ui-btn" onclick="nextAudio();">Next</button>
-            <button class="ui-btn" onclick="previousAudio();">Previous</button>
+            <button class="ui-btn" onclick="previousAudio();">Previous</button>   
+            <button class="ui-btn" id="playpauseOrNext" data-playpauseOrNext="playPause" onclick="headsetButtonPlaypauseOrNext();">Headset button as Next</button>
             <br />
             <h1>Online song list: </h1>
             <button class="ui-btn" id="onlineSound1" data-src="http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3" onclick="playAudio('onlineSound1');">Rock guitar</button>
@@ -260,12 +261,18 @@
                     break;
                 case 'music-controls-media-button-headset-hook':
                     // Do something
-                    console.log("music-controls-media-button-headset-hook: ");
-                    if (isPaused) {
-                        playAudio(currSongId);
+                    console.log("music-controls-media-button-headset-hook: ");    
+                    var playpauseOrNext = document.getElementById('playpauseOrNext').getAttribute('data-playpauseOrNext');  
+                    if (playpauseOrNext == "playPause") {
+                        if (isPaused) {
+                            playAudio(currSongId);
+                        }
+                        else {
+                            pauseAudio();
+                        }
                     }
                     else {
-                        pauseAudio();
+                        nextAudio();
                     }
                     /*
                     if (MusicControls.data.isPlaying) {
@@ -606,7 +613,7 @@
         }
 
         $(document).ready(function(){
-            /*
+            
             $( "#slider" ).on( "slide", function( event, ui ) {  
                 // Getter
                 console.log("slidechange ui.value: " + ui.value);
@@ -615,8 +622,20 @@
                 //stopAudio();
                 my_media.seekTo(ui.value * 1000);  
                 //playAudio(currSongId); 
-              */  
+                
             } ); 
+        
+        function headsetButtonPlaypauseOrNext() {
+            var playpauseOrNext = document.getElementById('playpauseOrNext').getAttribute('data-playpauseOrNext');
+            if (playpauseOrNext == "playPause") {
+                document.getElementById('playpauseOrNext').setAttribute('data-playpauseOrNext','next');
+                document.getElementById('playpauseOrNext').innerHTML = "Headset button as Play/Pause";
+            }
+            else {           
+                document.getElementById('playpauseOrNext').setAttribute('data-playpauseOrNext','playPause');   
+                document.getElementById('playpauseOrNext').innerHTML = "Headset button as Next";     
+            }
+        }
 
         });
     </script>
