@@ -625,19 +625,20 @@
                 
             } ); 
         
-        function headsetButtonPlaypauseOrNext() {
-            var playpauseOrNext = document.getElementById('playpauseOrNext').getAttribute('data-playpauseOrNext');
-            if (playpauseOrNext == "playPause") {
-                document.getElementById('playpauseOrNext').setAttribute('data-playpauseOrNext','next');
-                document.getElementById('playpauseOrNext').innerHTML = "Headset button as Play/Pause";
-            }
-            else {           
-                document.getElementById('playpauseOrNext').setAttribute('data-playpauseOrNext','playPause');   
-                document.getElementById('playpauseOrNext').innerHTML = "Headset button as Next";     
-            }
-        }
-
+        
         });
+        
+        function headsetButtonPlaypauseOrNext() {   
+            var playpauseOrNext = document.getElementById('playpauseOrNext').getAttribute('data-playpauseOrNext'); 
+            if (playpauseOrNext == "playPause") {            
+                document.getElementById('playpauseOrNext').setAttribute('data-playpauseOrNext','next');        
+                document.getElementById('playpauseOrNext').innerHTML = "Headset button as Play/Pause";      
+            }           
+            else {                      
+                document.getElementById('playpauseOrNext').setAttribute('data-playpauseOrNext','playPause');      
+                document.getElementById('playpauseOrNext').innerHTML = "Headset button as Next";           
+            }      
+        }
     </script>
 </body>
 
