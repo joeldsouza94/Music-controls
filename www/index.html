@@ -517,13 +517,13 @@
                                 
                                 //$( "#slider" ).slider();   
                                 // Setter
-                                console.log("position: " + position);
+                                alert("position: " + position);
                                 //var value = $( "#slider" ).slider( "option", "value" );
                                 $( "#slider" ).slider( "option", "value", position); 
                                 //$('.ui-slider-range').css('background','yellow');           
                                 // Getter
                                 var value = $( "#slider" ).slider( "option", "value" );
-                                console.log("position value: " + value);
+                                alert("position value: " + value);
                                 
                                 var formattedPosition = fancyTimeFormat(position+1);
                                 setAudioPosition(formattedPosition);
