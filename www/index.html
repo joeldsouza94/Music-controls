@@ -111,14 +111,14 @@
             <h3 id="audio_formatted_position" style="text-align: center;">0 sec</h3>
             <div id="slider"></div>
             <h3 id="audio_formatted_duration" style="text-align: center;">0 sec</h3>                  
-            <button class="ui-btn" onclick="playAudio("currSongId");">Play</button> 
+            <button class="ui-btn" onclick="playAudio('currSongId');">Play</button> 
             <button class="ui-btn" onclick="pauseAudio();">Pause</button>             
             <button class="ui-btn" onclick="nextAudio();">Next</button>
             <button class="ui-btn" onclick="previousAudio();">Previous</button>   
             <button class="ui-btn" id="playpauseOrNext" data-playpauseOrNext="playPause" onclick="headsetButtonPlaypauseOrNext();">Headset button as Next</button>
             <br />
             <h1>Online song list: </h1>
-            <button class="ui-btn" id="onlineSound1" data-src="http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3" onclick="playAudio("onlineSound1");">Rock guitar</button>
+            <button class="ui-btn" id="onlineSound1" data-src="http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3" onclick="playAudio('onlineSound1');">Rock guitar</button>
             <br />
             <h1>Phone song list: </h1> 
             <button class="ui-btn" onclick="onDeviceReadyFile();">Refresh List</button>
@@ -138,7 +138,7 @@
         $( "#slider" ).slider({
             range: "min"
         });
-        $(".ui-slider-handle").hide();
+        $('.ui-slider-handle').hide();
         var my_media = null;
         var mediaTimer = null;
         var prevSongId = null;
@@ -157,11 +157,11 @@
             console.log("onDeviceReadyMusicControls: ");
             console.log(MusicControls);
             MusicControls.create({
-                track       : title,        // optional, default : ""
-                artist      : "Muse",                       // optional, default : ""
-                cover       : "https://pbs.twimg.com/profile_images/596777148435705856/tsE4inUQ.jpg",      // optional, default : nothing
-                // cover can be a local path (use fullpath "file:///storage/emulated/...", or only "my_image.jpg" if my_image.jpg is in the www folder of your app)
-                //           or a remote url ("http://...", "https://...", "ftp://...")
+                track       : title,        // optional, default : ''
+                artist      : 'Muse',                       // optional, default : ''
+                cover       : 'https://pbs.twimg.com/profile_images/596777148435705856/tsE4inUQ.jpg',      // optional, default : nothing
+                // cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
+                //           or a remote url ('http://...', 'https://...', 'ftp://...')
                 isPlaying   : true,                         // optional, default : true
                 dismissable : false,                         // optional, default : false
 
@@ -171,13 +171,13 @@
                 hasClose  : false,       // show close button, optional, default: false
 
                 // iOS only, optional
-                album       : "Absolution",     // optional, default: ""
+                album       : 'Absolution',     // optional, default: ''
                 duration : 60, // optional, default: 0
                 elapsed : 10, // optional, default: 0
 
                 // Android only, optional
                 // text displayed in the status bar when the notification (and the ticker) are updated
-                ticker    : "Now playing "Time is Running Out""
+                ticker    : 'Now playing "Time is Running Out"'
             }, MusicControlsCreateOnSuccess, MusicControlsCreateOnError);
 
             // Register callback
@@ -203,41 +203,41 @@
 
           const message = JSON.parse(action).message;
             switch(message) {
-                case "music-controls-next":
+                case 'music-controls-next':
                     // Do something
                     console.log("music-controls-next: ");
                     nextAudio();
                     break;
-                case "music-controls-previous":
+                case 'music-controls-previous':
                     // Do something
                     console.log("music-controls-previous: ");
                     previousAudio();
                     break;
-                case "music-controls-pause":
+                case 'music-controls-pause':
                     // Do something
                     console.log("music-controls-pause: ");
                     pauseAudio();
                     MusicControls.updateIsPlaying(false); // toggle the play/pause notification button
                     MusicControls.updateDismissable(true);
                     break;
-                case "music-controls-play":
+                case 'music-controls-play':
                     // Do something
                     console.log("music-controls-play: ");
                     playAudio(currSongId);
                     MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
                     MusicControls.updateDismissable(false);
                     break;
-                case "music-controls-destroy":
+                case 'music-controls-destroy':
                     // Do something
                     console.log("music-controls-destroy: ");
                     MusicControls.destroy(MusicControlsDestroyOnSuccess, MusicControlsDestroyOnError);
                     break;
 
                 // External controls (iOS only)
-                case "music-controls-toggle-play-pause" :
+                case 'music-controls-toggle-play-pause' :
                     // Do something
                     break;
-                case "music-controls-seek-to":
+                case 'music-controls-seek-to':
                     const seekToInSeconds = JSON.parse(action).position;
                     MusicControls.updateElapsed({
                         elapsed: seekToInSeconds,
@@ -248,22 +248,22 @@
 
                 // Headset events (Android only)
                 // All media button events are listed below
-                case "music-controls-media-button" :
+                case 'music-controls-media-button' :
                     // Do something
                     console.log("music-controls-media-button: ");
                     break;
-                case "music-controls-headset-unplugged":
+                case 'music-controls-headset-unplugged':
                     // Do something
                     console.log("music-controls-headset-unplugged: ");
                     break;
-                case "music-controls-headset-plugged":
+                case 'music-controls-headset-plugged':
                     // Do something
                     console.log("music-controls-headset-plugged: ");
                     break;
-                case "music-controls-media-button-headset-hook":
+                case 'music-controls-media-button-headset-hook':
                     // Do something
                     console.log("music-controls-media-button-headset-hook: ");    
-                    var playpauseOrNext = document.getElementById("playpauseOrNext").getAttribute("data-playpauseOrNext");  
+                    var playpauseOrNext = document.getElementById('playpauseOrNext').getAttribute('data-playpauseOrNext');  
                     if (playpauseOrNext == "playPause") {
                         if (isPaused) {
                             playAudio(currSongId);
@@ -288,19 +288,19 @@
                     }
                     */
                     break;
-                case "music-controls-media-button-volume-up":
+                case 'music-controls-media-button-volume-up':
                     // Do something
                     console.log("music-controls-media-button-volume-up: ");
                     break;
-                case "music-controls-media-button-volume-down":
+                case 'music-controls-media-button-volume-down':
                     // Do something
                     console.log("music-controls-media-button-volume-down: ");
                     break;
-                case "music-controls-media-button-volume-mute":
+                case 'music-controls-media-button-volume-mute':
                     // Do something
                     console.log("music-controls-media-button-volume-mute: ");
                     break;
-                case "music-controls-media-button-play":
+                case 'music-controls-media-button-play':
                     // Do something
                     console.log("music-controls-media-button-play: ");
                     break;
@@ -324,7 +324,7 @@
             console.log("onDeviceReadyFile: ");
             console.log(cordova.file);
             j = 1;
-            var ul = document.getElementById("songList");
+            var ul = document.getElementById('songList');
             if (ul) {
                 while (ul.firstChild) {
                     ul.removeChild(ul.firstChild);
@@ -344,7 +344,7 @@
                     getDirectorySuccess(root);
                  },
                  function(error){
-                    console.log("File System Error: " + error.code);
+                    console.log('File System Error: ' + error.code);
                  }
               );
               */
@@ -388,8 +388,8 @@
                 }
             }   
             /*
-        var mylist = $("#songList");
-            var listitems = mylist.children("li").get();
+        var mylist = $('#songList');
+            var listitems = mylist.children('li').get();
             listitems.sort(function(a, b) {
                return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
             })
@@ -410,17 +410,17 @@
             button.innerHTML = songId + " " + songEntry.name;
             console.log("songId: " + songId);
             button.setAttribute("id", songId);
-            console.log("button Id: " + button.getAttribute("id"));
+            console.log("button Id: " + button.getAttribute('id'));
             button.setAttribute("class", "ui-btn");
             j++;
             button.setAttribute("onclick", 'playAudio("' + songId + '")');
-            console.log("button onclick Id: " + button.getAttribute("onclick"));
+            console.log("button onclick Id: " + button.getAttribute('onclick'));
             button.setAttribute("data-src", songEntry.toURL());
             button.setAttribute("data-track", songEntry.name);
             var hr = document.createElement("hr");
             li.appendChild(button);
             li.appendChild(hr);
-            document.getElementById("songList").appendChild(li);
+            document.getElementById('songList').appendChild(li);
         }
 
         function playAudio(id) { 
@@ -433,11 +433,11 @@
             prevSongId = currSongId;
             var duration;
             var audioElement = document.getElementById(currSongId);
-            var url = audioElement.getAttribute("data-src");
+            var url = audioElement.getAttribute('data-src');
             console.log("Audio URL: " +url);
-            track = audioElement.getAttribute("data-track");
+            track = audioElement.getAttribute('data-track');
             console.log("Audio track: " +track); 
-            document.getElementById("audio_track").innerHTML = track; 
+            document.getElementById('audio_track').innerHTML = track; 
             onDeviceReadyMusicControls(track);
             MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
             MusicControls.updateDismissable(false);
@@ -494,11 +494,11 @@
                     // Getter
                     var max = $( "#slider" ).slider( "option", "max" );
                     console.log("duration max: " + max);
-                    //document.getElementById("audio_duration").innerHTML = (dur) + " sec";
+                    //document.getElementById('audio_duration').innerHTML = (dur) + " sec";
                     
                     console.log("Math.round(duration): " + Math.round(duration));
                     var formattedDuration = fancyTimeFormat(duration);                 
-                    document.getElementById("audio_formatted_duration").innerHTML = formattedDuration;
+                    document.getElementById('audio_formatted_duration').innerHTML = formattedDuration;
                 }
             }, 100);
             //setAudioPosition("0:01");
@@ -533,7 +533,7 @@
                                 console.log("position: " + position);
                                 //var value = $( "#slider" ).slider( "option", "value" );
                                 $( "#slider" ).slider("value", Math.ceil(position)); 
-                                //$(".ui-slider-range").css("background","yellow");           
+                                //$('.ui-slider-range').css('background','yellow');           
                                 // Getter
                                 var value = $( "#slider" ).slider( "option", "value" );
                                 console.log("position value: " + value);
@@ -585,7 +585,7 @@
 
         // Set audio position
         function setAudioPosition(position) {
-            document.getElementById("audio_formatted_position").innerHTML = position;
+            document.getElementById('audio_formatted_position').innerHTML = position;
         }
         
         function nextAudio() {
@@ -633,14 +633,14 @@
         //});
         
         function headsetButtonPlaypauseOrNext() {   
-            var playpauseOrNext = document.getElementById("playpauseOrNext").getAttribute("data-playpauseOrNext"); 
+            var playpauseOrNext = document.getElementById('playpauseOrNext').getAttribute('data-playpauseOrNext'); 
             if (playpauseOrNext == "playPause") {            
-                document.getElementById("playpauseOrNext").setAttribute("data-playpauseOrNext","next");        
-                document.getElementById("playpauseOrNext").innerHTML = "Headset button as Play/Pause";      
+                document.getElementById('playpauseOrNext').setAttribute('data-playpauseOrNext','next');        
+                document.getElementById('playpauseOrNext').innerHTML = "Headset button as Play/Pause";      
             }           
             else {                      
-                document.getElementById("playpauseOrNext").setAttribute("data-playpauseOrNext","playPause");      
-                document.getElementById("playpauseOrNext").innerHTML = "Headset button as Next";           
+                document.getElementById('playpauseOrNext').setAttribute('data-playpauseOrNext','playPause');      
+                document.getElementById('playpauseOrNext').innerHTML = "Headset button as Next";           
             }      
         }
     </script>
