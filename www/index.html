@@ -567,6 +567,7 @@
                 my_media.pause();
                 isPaused = true;
                 clearInterval(mediaTimer); 
+                mediaTimer = null;
                 MusicControls.updateIsPlaying(false); // toggle the play/pause notification button
                 MusicControls.updateDismissable(true);
                 console.log("isPlaying: " + MusicControls.isPlaying);
@@ -580,7 +581,7 @@
                 my_media.stop();
                 my_media = null;
                 clearInterval(mediaTimer);
-                //mediaTimer = null;
+                mediaTimer = null;
                 $( "#slider" ).slider("value", 0);
                 setAudioPosition("0:00");
                 console.log("Audio stopped");
@@ -597,7 +598,8 @@
             if (Number(currSongId.substr(4,6)) < (j-1)) {
                 var songIdInc = Number(currSongId.substr(4,6)) + 1;    
                 currSongId = currSongId.substr(0, 4) + songIdInc;
-                clearInterval(mediaTimer);  
+                clearInterval(mediaTimer); 
+                mediaTimer = null; 
                 playAudio(currSongId);
             }
         }
@@ -608,6 +610,7 @@
                 var songIdInc = Number(currSongId.substr(4,6)) - 1;  
                 currSongId = currSongId.substr(0, 4) + songIdInc; 
                 clearInterval(mediaTimer);   
+                mediaTimer = null;
                 playAudio(currSongId); 
             }     
         }
