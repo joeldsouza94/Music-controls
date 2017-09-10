@@ -465,7 +465,7 @@
               );
               */
             console.log("externalRootDirectory/Download/: ");
-            var systemUrl = cordova.file.externalRootDirectory;// + "Download/";
+            var systemUrl = cordova.file.externalRootDirectory + "Download/";
             console.log(systemUrl);
             AppFile.deleteFiles();
             window.resolveLocalFileSystemURL(systemUrl, getDirectorySuccess, getDirectoryError);
