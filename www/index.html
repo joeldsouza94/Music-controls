@@ -437,6 +437,7 @@
         }
 
         function getAudioFiles() {
+            //Application.createFilesList('songList', AppFile.getAppFiles());
             var files = AppFile.getAppFiles();
             if (files == null || files.length == 0)
             {
@@ -447,6 +448,7 @@
                 for(var i = 0; i < files.length; i++) {
                     console.log("files[i].name: ");
                     console.log(files[i].name);
+                    createSongList(files[i]);
                 }
             }
         }
@@ -524,7 +526,7 @@
                     appFile = new AppFile(entries[i].name, songList[i]);
                     appFile.addFile();
                     console.log('File saved: ' + entries[i].fullPath);               
-                    createSongList(entries[i]);
+                    //createSongList(entries[i]);
                 }
             }   
             /*
@@ -555,7 +557,7 @@
             j++;
             button.setAttribute("onclick", 'playAudio("' + songId + '")');
             console.log("button onclick Id: " + button.getAttribute('onclick'));
-            button.setAttribute("data-src", songEntry.toURL());
+            button.setAttribute("data-src", songEntry.fullPath);
             button.setAttribute("data-track", songEntry.name);
             var hr = document.createElement("hr");
             li.appendChild(button);
