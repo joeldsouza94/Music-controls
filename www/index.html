@@ -116,6 +116,7 @@
             <button class="ui-btn" onclick="nextAudio();">Next</button>
             <button class="ui-btn" onclick="previousAudio();">Previous</button>   
             <button class="ui-btn" id="playpauseOrNext" data-playpauseOrNext="playPause" onclick="headsetButtonPlaypauseOrNext();">Headset button as Next</button>
+            <button class="ui-btn" onclick="getAudioFiles();">Files</button>   
             <br />
             <h1>Online song list: </h1>
             <button class="ui-btn" id="onlineSound1" data-src="http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3" onclick="playAudio('onlineSound1');">Rock guitar</button>
@@ -435,6 +436,21 @@
             console.log(errorCode);
         }
 
+        function getAudioFiles() {
+            var files = AppFile.getAppFiles();
+            if (files == null || files.length == 0)
+            {
+                console.log("no files");
+            }
+            else {
+                files.sort(AppFile.compareIgnoreCase);
+                for(var i = 0; i < files.length; i++) {
+                    console.log("files[i].name: ");
+                    console.log(files[i].name);
+                }
+            }
+        }
+
         document.addEventListener("deviceready", onDeviceReadyFile, false);
         function onDeviceReadyFile() {
             console.log("onDeviceReadyFile: ");
@@ -469,18 +485,6 @@
             console.log(systemUrl);
             AppFile.deleteFiles();
             window.resolveLocalFileSystemURL(systemUrl, getDirectorySuccess, getDirectoryError);
-            var files = AppFile.getAppFiles();
-            if (files == null || files.length == 0)
-            {
-                console.log("no files");
-            }
-            else {
-                files.sort(AppFile.compareIgnoreCase);
-                for(var i = 0; i < files.length; i++) {
-                    console.log("files[i].name: ");
-                    console.log(files[i].name);
-                }
-            }
         }
 
         function getDirectorySuccess(dirEntry) {
@@ -500,18 +504,20 @@
         function readDirectoryEntriesSuccess(entries) {
             console.log("readDirectoryEntriesSuccess: ");
             entries.sort();
-            var i;
             var appFile;
             var extension;
-            for (i=0; i<entries.length; i++) {
+            for (var i=0; i<entries.length; i++) {
+                if (entries[i].name === '.')
+                    continue;
+ 
+                extension = entries[i].name.substr(entries[i].name.lastIndexOf('.'));
                 console.log(entries[i]);
-                console.log(entries[i].isDirectory);
-                console.log(entries[i].isFile);
                 if (entries[i].isDirectory === true) {
                     console.log("isDirectory");
                     getDirectorySuccess(entries[i]);
                 }
                 else if(entries[i].isFile === true && $.inArray(extension, AppFile.EXTENSIONS) >= 0){
+                    console.log("isFile");
                     songList[i] = entries[i].toURL();
                     console.log("song toURL: ");
                     console.log(songList[i]); 
