@@ -486,7 +486,8 @@
             var systemUrl = cordova.file.externalRootDirectory + "Download/";
             console.log(systemUrl);
             AppFile.deleteFiles();
-            window.resolveLocalFileSystemURL(systemUrl, getDirectorySuccess, getDirectoryError);
+            //window.resolveLocalFileSystemURL(systemUrl, getDirectorySuccess, getDirectoryError);
+            getDirectorySuccess(systemUrl);
             getAudioFiles();
         }
 
